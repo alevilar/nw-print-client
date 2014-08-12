@@ -3,84 +3,25 @@
   <head>
     <title>Ale DEMO</title>
 
-	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-
-
-
-	<script>
-
-	// PRIMERO MINIMIZAR AL TRAY
-
-    // Load library
-    var gui = require('nw.gui');
-
-    // Reference to window and tray
-    var win = gui.Window.get();
-    var tray;
-
-    // Get the minimize event
-    win.on('minimize', function() {
-      // Hide window
-      this.hide();
-
-      // Show tray
-      tray = new gui.Tray({ icon: 'icon.png' });
-console.debug(tray);
-      // Show window and remove tray when clicked
-      tray.on('click', function() {
-        win.show();
-        this.remove();
-        tray = null;
-      });
-    });
-  </script>
-
+	
 
   </head>
-  <body>
-	<h1>Servidor de impresion</h1>
 
-	<p>
-		EL servidor de impresion se encarga de consultar al server si tiene impresiones pendientes.<br>
-		Lo hara de manera recurrente cada una cantidad determinada de segundos. La respuesta del servidor es un listado de json´s con impresiones para hacer
-	</p>
+  <body>
+
+	<h1>Printer Jobs Monitor</h1>
+	
+	<div id="activity"></div>
     
   </body>
 
-<script>
-   var fs = require('fs');
 
-	var sys = require('sys');
+  <script src="js/jquery.min.js"></script>	
+	<script src="js/underscore-min.js"></script>
+	<script src="js/backbone-min.js"></script>
+	<script src="js/backbone.marionette.min.js"></script>	
+	<script src="js/index.js"></script>
+	<script src="js/print_driver.js"></script>
 
-	var exec = require('child_process').exec;
-	var child;
-	
-	
-	//$.getJSON("http://localhost/chocha012/printer.php")
-	$.getJSON("printer.json")
-		.done(function(data){
-			console.info("termino %o", data);
-		})
-		.error(function(err, coss){
-			console.info("Hay erro %o y cos %o", err, coss);
-		}); 
-
-	
-
-	child = exec("./pruf", function (error, stdout, stderr) {
-
-	});
-
-
-
-	var util = require('util');
-		console.log("installed printers:\n"+util.inspect(printer.getPrinters(), {colors:true, depth:10}));
-
-/*
-	var sys = require('sys')
-	var exec = require('child_process').exec;
-	function puts(error, stdout, stderr) { sys.puts(stdout) }
-	exec("ls -la", puts);
-*/
-</script>
 </html>
+

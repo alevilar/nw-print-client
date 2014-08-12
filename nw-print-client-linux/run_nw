@@ -1,2 +1,0 @@
-#!/bin/sh
-LD_LIBRARY_PATH=/home/alejandro/nw/nw:$LD_LIBRARY_PATH ./nw $*
