@@ -5,15 +5,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "nodewebkit":"latest",
-    "ember": "latest",
-    "handlebars": "latest",
-    "jquery": "latest"
+    "nodewebkit":"latest"
    },
   "os" : [ "win32", "linux" ],
   "window": {
     "icon": "icon.png",
-    "show_in_taskbar": true
+    "show_in_taskbar": true,
+    "toolbar": true
   },
   "scripts": {
     "start": "nodewebkit"

@@ -1,45 +1,42 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Ale DEMO</title>
-  </head>
+<head>
+  <meta charset="utf-8">
+  <title>Ember Starter Kit</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <script type="text/x-handlebars">
+    <h1>PaxaPOS</h1>
+    <h2>Servidor de Impresión</h2>
 
-  <body>
+    <p>{{onlineLoggedClassName}}</p>
+
+    <p>
+    {{outlet}}
+    </p>
+  </script>
+
+  <script type="text/x-handlebars" id="index">
+    INDEX Page
+  </script>
 
 
-
-	<script type="text/x-handlebars">
-		<h1>Dentro del coso de handlebars</h1>
-
-		{{outlet}}
-
-	</script>
-
-
-	<script type="text/x-handlebars" id="jobs-listing">
-		<h3>Listando</h3>
-		<div id="activity"></div>
-
-		<div id="data"></div>
-		{{outlet}}
-	</script>
-
-	<script src="js/index.js"></script>
-
-  </body>
 
   <script type="text/javascript">
 
- 	// var jQuery = require('jquery');
+  require('nw.gui').Window.get().showDevTools()
+
   </script>
 
-<!--
-  	<script src="js/jquery.min.js"></script>	
-	<script src="js/underscore-min.js"></script>
-	<script src="js/backbone-min.js"></script>
-	<script src="js/backbone.marionette.min.js"></script>	
-	<script src="js/index.js"></script>
-	<script src="js/print_driver.js"></script>
--->
-</html>
 
+  <script src="js/libs/jquery-2.1.1.min.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+
+  <script src="js/libs/ember-1.6.1.js"></script>
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>

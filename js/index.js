@@ -1,6 +1,3 @@
-require('ember');
-require('ember.handlebars');
-
 
 Config = {
 	"Config": {
@@ -46,23 +43,7 @@ var jsonUrlPrinterJobs = urlDomain + "/printer_jobs";
 
 
 	var doLogin = function () {
-		$.ajax({
-			type: "POST",
-			url: urlDomain+"/users/login",
-			data: LoginUser
-		}).done(function( ){
-			Cli.set('logged', true);
-			$.ajax({
-				type: "GET",
-				url: urlDomain+"/printer_jobs/monitor",
-				data: LoginUser
-			}).done(function(data){
-				$("#data").html(data);
-			});
-			
-		}).error(function(){
-			Cli.set('logged', false);
-		});
+		
 	}
 
 
