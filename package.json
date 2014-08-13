@@ -1,0 +1,24 @@
+{
+  "main": "index.html",
+  "name": "nw-printer",
+  "description": "Paxapos Print Server ",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "nodewebkit":"latest",
+    "ember": "latest",
+    "handlebars": "latest",
+    "jquery": "latest"
+   },
+  "os" : [ "win32", "linux" ],
+  "window": {
+    "icon": "icon.png",
+    "show_in_taskbar": true
+  },
+  "scripts": {
+    "start": "nodewebkit"
+  },
+  "bin": {
+     "px-print": "bin/px-print.bin.js"
+  }
+}
