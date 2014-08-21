@@ -1,6 +1,6 @@
 {
   "main": "app/index.html",
-  "name": "pxpsprintcli",
+  "name": "px_printer",
   "description": "Paxapos Print Client",
   "version": "0.1.0",
   "private": true,
@@ -10,19 +10,15 @@
   "webkit": {
         "plugin": true
   },
-    "scripts": {         
+  "scripts": {         
          "start": "nodewebkit",
-         "spooler": "spooler"
+         "spooler": "./bin/spooler"
   },
   "dependencies": {	  
     "bootstrap": "latest",
     "tmp": "latest",	  
     "jquery": "latest"
   },
-  "bin": {
-    "spooler.exe": "bin/spooler.exe",
-    "spooler": "./bin/spooler"
-    },
   "os": [
     "win32",
     "linux"

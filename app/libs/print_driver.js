@@ -10,6 +10,7 @@ console.debug("iniciando print driver");
 	var fs = require("fs");
 	var path = require("path");
 	var spawn = require("child_process").spawn;
+	var execFile = require("child_process").execFile;
 
 	var mainOb = {
 		createTmpFile: function ( job, callback) {
@@ -103,22 +104,27 @@ console.debug("iniciando print driver");
 			var def = $.Deferred();
 			// si es browser normal salir sin imprimir
 
-			mainOb.createTmpFile( job, function(path){
-				console.info("se creo archivo temporal "+path);
+			mainOb.createTmpFile( job, function(pathName){
+				console.info("se creo archivo temporal "+pathName);
 		    	// imprimir con spooler
-		    	var comando = mainOb.comando[comandoName].get.call(this, job.Printer.name, path)    
+		    	var comando = mainOb.comando[comandoName].get.call(this, job.Printer.name, pathName)    
 
 
 		    	console.log(comando.cm);
 		    	try{
+
 		    		var ops = {
-		    			cwd: 'bin/'
+		    			cwd: process.cwd() + path.sep + "bin",
+					    env: process.env,
+					    detached: true,
+					    stdio: 'inherit'
 					}
+					console.info(ops);
 					console.info( " - - - - - - - - - -- -- -  - - - - - - - " + fs.realpathSync(ops.cwd) );
-					/*
-		    		var sp = spawn( comando.cm, comando.args, ops );
+		    		var sp = execFile( comando.cm, comando.args, ops );
 
-
+		    		console.info("se ejecuto");
+		    		
 		    		sp.stdout.on('data', function (data) {
 					  console.log('stdout: ' + data);
 					  def.resolve(data);
@@ -132,7 +138,7 @@ console.debug("iniciando print driver");
 					sp.on('close', function (code) {
 					  console.log('child process exited with code ' + code);
 					});
-					*/
+
 		    	} catch(e) {
 		    		console.error("Fallo manolo");
 		    		console.error(e);

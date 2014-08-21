@@ -41,18 +41,16 @@ App = Ember.Application.create({
 						gui.Window.get().show();	
 					}	
 				}
-				
+
 
 				// chequeo que no se corte nunca. y si se corta, lo vuelvo a arrancar
 				var interval = setInterval( function () {
 					if ( !App.printerJobsController.jobs.fetching ) {
-						App.printerJobsController.jobs.startFetch();
+						//App.printerJobsController.jobs.startFetch();
 					}
 				}, 13000 );
 
-
-				// comenzar a traer: fetch from server
-				this.jobs.startFetch();
+				
 			}
 
 		});
