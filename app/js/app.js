@@ -46,7 +46,7 @@ App = Ember.Application.create({
 				// chequeo que no se corte nunca. y si se corta, lo vuelvo a arrancar
 				var interval = setInterval( function () {
 					if ( !App.printerJobsController.jobs.fetching ) {
-						//App.printerJobsController.jobs.startFetch();
+						App.printerJobsController.jobs.startFetch();
 					}
 				}, 13000 );
 
@@ -160,8 +160,8 @@ App.ApplicationController = Ember.Controller.extend({
 
 	completeUrlHostWithSiteName: function ( siteName ) {
 
-		//return "http://"+siteName+".paxapos.com";
-		return "http://localhost/"+siteName;
+		return "http://"+siteName+".paxapos.com";
+		//return "http://localhost/"+siteName;
 	},
 
   	updateUrlHost: function(){	

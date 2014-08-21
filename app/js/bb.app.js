@@ -10,7 +10,7 @@
 			if ( !url ) {
 		  		return 'http://localhost';
 		  	}
-		  	url = url + "/printer_jobs/" + this.get('id');
+		  	url = url + "printer_jobs/" + this.get('id');
 		  	return url;
 		},		
 		getDriver: function () {			
@@ -47,7 +47,7 @@
 		  	if ( !url ) {
 		  		return 'http://localhost';
 		  	}
-		  	return url +"/printer_jobs";
+		  	return url +"printer_jobs";
 		  },
 		  model: BBApp.Job,
 		  interval: null,
