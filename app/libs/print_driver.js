@@ -42,7 +42,7 @@ console.debug("iniciando print driver");
 				win32: function ( printerName, fpath) {
 					//var comando = fs.realpathSync("bin") + path.sep + "spooler.exe -p"+printerName+" -f "+fpath+" -b "+tmpFolder;
 					var comando = {
-						cm: "spooler",
+						cm: "spooler.exe",
 						args: [ 
 							"-p"+printerName,
 						 	"-f "+fpath,
@@ -115,6 +115,7 @@ console.debug("iniciando print driver");
 		    			cwd: 'bin/'
 					}
 					console.info( " - - - - - - - - - -- -- -  - - - - - - - " + fs.realpathSync(ops.cwd) );
+					/*
 		    		var sp = spawn( comando.cm, comando.args, ops );
 
 
@@ -131,7 +132,7 @@ console.debug("iniciando print driver");
 					sp.on('close', function (code) {
 					  console.log('child process exited with code ' + code);
 					});
-
+					*/
 		    	} catch(e) {
 		    		console.error("Fallo manolo");
 		    		console.error(e);
