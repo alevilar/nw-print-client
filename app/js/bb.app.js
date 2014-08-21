@@ -62,6 +62,9 @@
 		 
 		  startFetch: function () {
 		  		var reloadInterval = localStorage.getItem("reloadInterval");
+		  		if ( this.fetching ) {
+		  			this.stopFetch();
+		  		}
 		  		if ( this.url() ) {		  			
 		  			this.__doFetch();			  			
 		  			this.interval = setInterval( this.__doFetch.bind(this), reloadInterval );

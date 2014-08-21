@@ -8,7 +8,8 @@ console.debug("iniciando print driver");
 	console.info("la carpeta temporal del sistema es "+tmpFolder);
 	var tmp = require("tmp");
 	var fs = require("fs");
-	var exec = require("child_process").exec;
+	var path = require("path");
+	var spawn = require("child_process").spawn;
 
 	var mainOb = {
 		createTmpFile: function ( job, callback) {
@@ -35,16 +36,32 @@ console.debug("iniciando print driver");
 					if ( mainOb.comando.fiscal.hasOwnProperty( process.platform )) {
 						return mainOb.comando.fiscal[process.platform].apply( this , arguments );
 					}
-					throw "El SO "+process.platform+" no esta soportado";
+					throw "El SO "+process.platform+" no nesta soportado";
 				},
 
 				win32: function ( printerName, fpath) {
-					var comando = "spooler.exe -p"+printerName+" -f "+fpath+" -b "+tmpFolder;
+					//var comando = fs.realpathSync("bin") + path.sep + "spooler.exe -p"+printerName+" -f "+fpath+" -b "+tmpFolder;
+					var comando = {
+						cm: "spooler",
+						args: [ 
+							"-p"+printerName,
+						 	"-f "+fpath,
+						 	"-b "+tmpFolder
+						]
+					}
+
 					return comando;
 				},
 
 				linux: function ( printerName, fpath) {
-					var comando = "spooler -p"+printerName+" -f "+fpath+" -b "+tmpFolder;
+					var comando = {
+						cm: "./spooler",
+						args: [ 
+							"-p"+printerName,
+						 	"-f "+fpath,
+						 	"-b "+tmpFolder
+						]
+					};
 					return comando;
 				}
 			},
@@ -89,21 +106,41 @@ console.debug("iniciando print driver");
 			mainOb.createTmpFile( job, function(path){
 				console.info("se creo archivo temporal "+path);
 		    	// imprimir con spooler
-		    	var comando = mainOb.comando[comandoName].get.call(this, job.Printer.name, path)    	
-			
-				var proccess = exec(comando, function (error, stdout, stderr) {
+		    	var comando = mainOb.comando[comandoName].get.call(this, job.Printer.name, path)    
 
-					console.info("se mando a imprimir el comando "+comando);
+
+		    	console.log(comando.cm);
+		    	try{
+		    		var ops = {
+		    			cwd: 'bin/'
+					}
+					console.info( " - - - - - - - - - -- -- -  - - - - - - - " + fs.realpathSync(ops.cwd) );
+		    		var sp = spawn( comando.cm, comando.args, ops );
+
+
+		    		sp.stdout.on('data', function (data) {
+					  console.log('stdout: ' + data);
+					  def.resolve(data);
+					});
+
+					sp.stderr.on('data', function (data) {
+					  def.reject(data);
+					  console.error('stderr: ' + data);
+					});
+
+					sp.on('close', function (code) {
+					  console.log('child process exited with code ' + code);
+					});
+
+		    	} catch(e) {
+		    		console.error("Fallo manolo");
+		    		console.error(e);
+
+		    	}
 					
-					if (stderr){
-						def.reject(stderr);
-						console.error(stderr);
-					}					
-					console.debug(error);
-					console.debug(stdout);
-					busy = false;
-					def.resolve(stdout);
-				});
+
+				
+
 		    });
 		    
 		    return def.promise();

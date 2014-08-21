@@ -20,8 +20,8 @@
     "jquery": "latest"
   },
   "bin": {
-    "spooler.exe": "node_modules/.bin/spooler.exe",
-    "spooler": "node_modules/.bin/spooler"
+    "spooler.exe": "bin/spooler.exe",
+    "spooler": "./bin/spooler"
     },
   "os": [
     "win32",
