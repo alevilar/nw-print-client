@@ -26,7 +26,7 @@ App = Ember.Application.create({
 
 				// al eliminar eun job, tambien devo quitar del controller
 				this.jobs.on('remove', function(job) {
-					self.popObject( );
+					//self.popObject( );
 				});
 
 
