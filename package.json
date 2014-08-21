@@ -10,11 +10,12 @@
   "webkit": {
         "plugin": true
   },
-    "scripts": {
+    "scripts": {         
          "start": "nodewebkit",
          "spooler": "spooler"
   },
   "dependencies": {	  
+    "bootstrap": "latest",
     "tmp": "latest",	  
     "jquery": "latest"
   },

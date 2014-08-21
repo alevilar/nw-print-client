@@ -16,7 +16,11 @@ App = Ember.Application.create({
 
 				// al agregar un job, debo agregarlo tambien a este controller
 				this.jobs.on('add', function(job) {
+					console.info("App.printerJobsController:: Hay un nuevo trabajo por imprimir %o", self);
 					self.unshiftObject( job.toJSON() );
+					if ( self.length > 5 ) {
+						self.popObject();
+					}
 				});
 
 
