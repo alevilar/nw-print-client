@@ -208,15 +208,3 @@ App.ApplicationController = Ember.Controller.extend({
 		}
 	  }
 });
-
-
-
-App.Printer = Em.Object.extend({
-  	name: "printername"
-});
-
-
-
-
-App.PrinterJob = Ember.Object.extend();
-
