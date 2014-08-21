@@ -19,6 +19,10 @@
     "tmp": "latest",	  
     "jquery": "latest"
   },
+  "bin": {
+    "spooler.exe": "node_modules/.bin/spooler.exe",
+    "spooler": "node_modules/.bin/spooler",
+    },
   "os": [
     "win32",
     "linux"
