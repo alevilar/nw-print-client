@@ -1,22 +1,35 @@
 {
-  "main": "index.html",
-  "name": "nw-printer",
-  "description": "Paxapos Print Server ",
+  "main": "app/index.html",
+  "name": "pxpsprintcli",
+  "description": "Paxapos Print Client",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "nodewebkit":"latest"
-   },
-  "os" : [ "win32", "linux" ],
+  "engines": {
+    "node": "0.11.x"
+  },
+  "webkit": {
+        "plugin": true
+  },
+    "scripts": {
+         "start": "nodewebkit",
+         "spooler": "spooler"
+  },
+  "dependencies": {	  
+    "tmp": "latest",	  
+    "jquery": "latest"
+  },
+  "os": [
+    "win32",
+    "linux"
+  ],
   "window": {
-    "icon": "icon.png",
-    "show_in_taskbar": true,
-    "toolbar": true
-  },
-  "scripts": {
-    "start": "nodewebkit"
-  },
-  "bin": {
-     "px-print": "bin/px-print.bin.js"
+    "show": true,
+    "toolbar": true,
+    "always-on-top": true,
+    "width": 230,
+    "height": 380,
+    "position": "mouse",
+    "frame": true,
+    "resizable": false
   }
 }

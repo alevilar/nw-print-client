@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html land="es">
+<head>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <title>PaxaPOS Servidor de Impresión</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+
+<body>
+
+  
+  <script type="text/x-handlebars">
+    
+    <nav class="navbar  navbar-inverse" role="navigation">
+      <div class="container-fluid">
+         <div class="navbar-header">
+            <span class="navbar-brand"><img {{bind-attr src=onlineImg}}>PaxaPOS</span>            
+        </div>        
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    {{#if onlineMessage}}
+    <p {{bind-attr class=onlineClass}}>{{onlineMessage}}</p>
+    {{/if}}
+
+
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group" id="g-url-host">
+            <label>Nombre del Sitio</label>
+            {{input value=siteName class="form-control"}}
+            <p class="error text-danger small" style="display: none">
+              El nombre de su sitio Paxapos Ej para "http://mi-sitio.paxapos.com" deberá ingresar "mi-sitio"
+            </p>
+          </div>
+          
+          <div class="form-group" id="g-reload-interval">
+            <label>Intervalo de refresco</label>
+            {{input value=reloadInterval class="form-control"}}
+            <p class="error text-danger small" style="display: none">
+              Deberá colocar un valor entero, en miliseguntos, mayor a {{minInterval}}ms. Nota: 1000ms equivalen a 1 segundo.
+            </p>
+          </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-6">
+          <button {{action ocultarVentana}} value="Cerrar Ventana" class="btn">Ocultar</button>
+        </div>
+
+        <div class="col-xs-6">
+          <button {{action cerrarVentana}} value="Cerrar Ventana" class="btn btn-danger">Cerrar</button>
+        </div>
+      </div>
+
+
+      {{outlet}}
+
+
+    </div>
+  </script>
+
+
+
+
+
+  
+  <script src="js/libs/jquery-2.1.1.min.js"></script>
+  <script src="js/underscore-min.js"></script>
+  <script src="js/backbone-min.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+
+  <script src="js/libs/ember-1.6.1.js"></script>
+ 
+  <script src="js/vars.js"></script>
+  
+  <script src="js/bb.app.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/print_driver.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.js"></script>
+
+
+  <script>
+    App.start();  
+  </script>
+</body>
+</html>
