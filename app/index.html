@@ -26,6 +26,10 @@
             <span class="navbar-brand"><img {{bind-attr src=onlineImg}}>PaxaPOS</span>            
         </div>        
       </div><!-- /.container-fluid -->
+
+      
+
+
     </nav>
 
     {{#if onlineMessage}}
@@ -33,28 +37,50 @@
     {{/if}}
 
 
-    <div class="container-fluid">
 
+    <div class="container-fluid">
       <div class="row">
-        <div class="col-12">
-          <div class="form-group" id="g-url-host">
-            <label>Nombre del Sitio</label>
-            {{input value=siteName class="form-control"}}
-            <p class="error text-danger small" style="display: none">
-              El nombre de su sitio Paxapos Ej para "http://mi-sitio.paxapos.com" deberá ingresar "mi-sitio"
-            </p>
-          </div>
-          
-          <div class="form-group" id="g-reload-interval">
-            <label>Intervalo de refresco</label>
-            {{input value=reloadInterval class="form-control"}}
-            <p class="error text-danger small" style="display: none">
-              Deberá colocar un valor entero, en miliseguntos, mayor a {{minInterval}}ms. Nota: 1000ms equivalen a 1 segundo.
-            </p>
-          </div>
+
+    
+
+       <!-- Nav tabs -->
+        <ul class="nav nav-pills" role="tablist">
+          <li class="active"><a href="#logs" role="tab" data-toggle="pill">Logs</a></li>
+          <li><a href="#config" role="tab" data-toggle="pill">Config</a></li>
+        </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="logs">
+          <ol>
+          {{#each App.printerJobsController.content}}
+            <li class="small text-info">{{Printer.name}}</li>
+          {{/each}}
+          </ol>
         </div>
+        <div class="tab-pane" id="config">
+            <div class="form-group" id="g-url-host">
+              <label>Nombre del Sitio</label>
+              {{input value=siteName class="form-control"}}
+              <p class="error text-danger small" style="display: none">
+                El nombre de su sitio Paxapos Ej para "http://mi-sitio.paxapos.com" deberá ingresar "mi-sitio"
+              </p>
+            </div>
+            
+            <div class="form-group" id="g-reload-interval">
+              <label>Intervalo de refresco</label>
+              {{input value=reloadInterval class="form-control"}}
+              <p class="error text-danger small" style="display: none">
+                Deberá colocar un valor entero, en miliseguntos, mayor a {{minInterval}}ms. Nota: 1000ms equivalen a 1 segundo.
+              </p>
+            </div>
         </div>
+
+        
       </div>
+    </div>
+
+      
 
       <div class="row">
         <div class="col-xs-6">

@@ -30,7 +30,7 @@
     "width": 230,
     "height": 380,
     "position": "mouse",
-    "frame": true,
+    "frame": false,
     "resizable": false
   }
 }

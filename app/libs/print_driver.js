@@ -10,6 +10,7 @@ console.debug("iniciando print driver");
 	var fs = require("fs");
 	var path = require("path");
 	var spawn = require("child_process").spawn;
+	var exec = require("child_process").exec;
 	var execFile = require("child_process").execFile;
 
 	var mainOb = {
@@ -41,29 +42,38 @@ console.debug("iniciando print driver");
 				},
 
 				win32: function ( printerName, fpath) {
-					//var comando = fs.realpathSync("bin") + path.sep + "spooler.exe -p"+printerName+" -f "+fpath+" -b "+tmpFolder;
+					var fullPath = fs.realpathSync('bin');
+					
+					//return  fullPath + path.sep +"spooler -p"+printerName+ " -f "+fpath+" -b"+tmpFolder;
+
 					var comando = {
-						cm: "spooler.exe",
-						args: [ 
+						cm: fullPath + path.sep +"wspooler",
+						args: [
 							"-p"+printerName,
-						 	"-f "+fpath,
-						 	"-b "+tmpFolder
+							"-f",
+							fpath,
+							"-b",
+							tmpFolder
 						]
 					}
-
 					return comando;
 				},
 
-				linux: function ( printerName, fpath) {
+				linux: function ( printerName, fpath) {	
+					var fullPath = fs.realpathSync('bin');	
+
 					var comando = {
-						cm: "./spooler",
-						args: [ 
+						cm: fullPath + path.sep + "spooler",
+						args: [
 							"-p"+printerName,
-						 	"-f "+fpath,
-						 	"-b "+tmpFolder
+							"-f",
+							fpath,
+							"-b",
+							tmpFolder
 						]
-					};
-					return comando;
+					}
+					return comando;			
+					//return fullPath + path.sep +"spooler -p"+printerName+ " -f "+fpath+" -b"+tmpFolder;
 				}
 			},
 
@@ -78,12 +88,31 @@ console.debug("iniciando print driver");
 					throw "El SO "+process.platform+" no esta soportado";
 				},
 
-				linux: function (printerName, path) {
-					return  "lp -d "+printerName+" "+path;
+				linux: function (printerName, filePath) {
+					var comando = {
+						cm: "lp",
+						args: [
+							"-d",
+							printerName,
+							filePath
+						]
+					}
+					return comando;
+					//return  "lp -d "+printerName+" "+filePath;
 				},
 
-				win32: function  (printerName, path) {
-					return  "PRINT /D:"+printerName+" "+path;
+				win32: function  (printerName, filePath) {
+
+					var comando = {
+						cm: "PRINT",
+						args: [
+							"/D:"+printerName,
+							filePath
+						]
+					}
+					return comando;
+
+					//return  "PRINT /D:"+printerName+" "+filePath;
 				}
 			}
 		},
@@ -107,21 +136,14 @@ console.debug("iniciando print driver");
 			mainOb.createTmpFile( job, function(pathName){
 				console.info("se creo archivo temporal "+pathName);
 		    	// imprimir con spooler
-		    	var comando = mainOb.comando[comandoName].get.call(this, job.Printer.name, pathName)    
+		    	var comando = mainOb.comando[comandoName].get.call(this, job.Printer.name, pathName)    		    
+		    	
+		    	console.info( " OOO-  - - - - - - - IMPRIMIENDOOOOOOOOOOOO");
+		    	console.log( comando);
 
-
-		    	console.log(comando.cm);
 		    	try{
 
-		    		var ops = {
-		    			cwd: process.cwd() + path.sep + "bin",
-					    env: process.env,
-					    detached: true,
-					    stdio: 'inherit'
-					}
-					console.info(ops);
-					console.info( " - - - - - - - - - -- -- -  - - - - - - - " + fs.realpathSync(ops.cwd) );
-		    		var sp = execFile( comando.cm, comando.args, ops );
+		    		var sp = execFile( comando.cm, comando.args);
 
 		    		console.info("se ejecuto");
 		    		
@@ -136,13 +158,14 @@ console.debug("iniciando print driver");
 					});
 
 					sp.on('close', function (code) {
-					  console.log('child process exited with code ' + code);
+						def.resolve(code);
+					    console.log('child process exited with code ' + code);
 					});
 
 		    	} catch(e) {
-		    		console.error("Fallo manolo");
+		    		def.reject(e);
+		    		console.error("Fallo al imprimir");
 		    		console.error(e);
-
 		    	}
 					
 
