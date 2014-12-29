@@ -26,11 +26,10 @@
   "window": {
     "show": true,
     "toolbar": true,
-    "always-on-top": true,
-    "width": 230,
-    "height": 380,
+    "width": 500,
+    "height": 800,
     "position": "mouse",
-    "frame": false,
-    "resizable": false
+    "frame": true,
+    "resizable": true
   }
 }

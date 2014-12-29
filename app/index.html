@@ -23,8 +23,8 @@
     <nav class="navbar  navbar-inverse" role="navigation">
       <div class="container-fluid">
          <div class="navbar-header">
-            <span class="navbar-brand"><img {{bind-attr src=onlineImg}}>PaxaPOS</span>            
-        </div>        
+            <span class=""><img {{bind-attr src=onlineImg}}>PaxaPOS</span>            
+        </div>
       </div><!-- /.container-fluid -->
 
       
@@ -52,18 +52,22 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div class="tab-pane active" id="logs">
-          <ol>
-          {{#each App.printerJobsController.content}}
-            <li class="small text-info">{{Printer.name}}</li>
-          {{/each}}
-          </ol>
+            <div id="login-iframe"></div>
+            {{textarea value="logs"}}
         </div>
         <div class="tab-pane" id="config">
+
+            <div class="form-group" id="g-url-host-name">
+              <label>Host Name</label>
+              {{input value=hostName class="form-control" type="url"}}
+            </div>
+
+
             <div class="form-group" id="g-url-host">
               <label>Nombre del Sitio</label>
               {{input value=siteName class="form-control"}}
               <p class="error text-danger small" style="display: none">
-                El nombre de su sitio Paxapos Ej para "http://mi-sitio.paxapos.com" deberá ingresar "mi-sitio"
+                El nombre de su sitio Paxapos Ej para "http://www.paxapos.com/mi-sitio" deberá ingresar "mi-sitio"
               </p>
             </div>
             
@@ -107,9 +111,9 @@
   <script src="js/libs/jquery-2.1.1.min.js"></script>
   <script src="js/underscore-min.js"></script>
   <script src="js/backbone-min.js"></script>
-  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/handlebars-v2.0.0.js"></script>
 
-  <script src="js/libs/ember-1.6.1.js"></script>
+  <script src="js/libs/ember-1.9.1.js"></script>
  
   <script src="js/vars.js"></script>
   
